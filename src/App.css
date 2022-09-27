@@ -17,9 +17,15 @@ body {
   background-color: var(--swatch-foundation);
 }
 
+/*
+Importing the fonts Tangerine, as requested 
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
+
 #root {
   background-color: var(--swatch-primary);
-  font-family: serif;
+  font-family: 'Tangerine', cursive;
   position: absolute;
   width: 80%;
   left: 10%;
