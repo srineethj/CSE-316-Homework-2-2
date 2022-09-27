@@ -79,8 +79,16 @@ export default class SongCard extends React.Component {
             >
                 {num}{"."}{" "}
                 <a href={'https://www.youtube.com/watch?v=' + song.youTubeId} target='blank'>
-                    {song.title} by {song.artist}
+                    {song.title} by {song.artist} 
                 </a>
+                {" "}
+                <input
+                type='button'
+                id={'delete-song-' + num}
+                className='list-card-button'
+                onClick={this.handleRemoveSong}
+                value={'X'}
+                />
             </div>
         )
     }
