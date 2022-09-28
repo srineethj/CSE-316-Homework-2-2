@@ -243,12 +243,12 @@ class App extends React.Component {
         this.setStateWithUpdatedList(list);
     }
     // THIS FUNCTION ADDS A SONG IN THE CURRENT LIKE FROM START TO END AND ADJUSTS ALL OTHER ITEMS ACCORDINGLHY 
-    addSong = () => {
+    addSong = (title, artist, youtubeId) => {
         let list = this.state.currentList;
         let song = {
-          title: 'Untitled',
-          artist: 'Unknown',
-          youTubeId: 'dQw4w9WgXcQ',
+          title: title,
+          artist: artist,
+          youTubeId: youtubeId,
         };
         list.songs.push(song);
         this.setStateWithUpdatedList(list);
@@ -257,7 +257,7 @@ class App extends React.Component {
     // THIS FUNCTION REMOVES THE SONG AT A SET INDEX
     deleteSong = () => {
         let list = this.state.currentList;
-        let removedSong = list.songs.splice(this.state.selectedSongIdx, 1)[0];
+        let removedSong = list.songs.splice(this.state.selectedIndex, 1)[0];
         this.setStateWithUpdatedList(list);
         return removedSong;
     }
@@ -276,9 +276,9 @@ class App extends React.Component {
     }
 
     // THIS FUNCTION ADDS A AddSong_Transcation TO THE TRANSACTION STACK
-    addAddSongTransaction = (start, end) => {
-        let transction = new AddSong_Transaction(this, start, end);
-        this.tps.addTransaction(transction);
+    addAddSongTransaction = () => {
+        let transaction = new AddSong_Transaction(this);
+        this.tps.addTransaction(transaction);
     }
 
     addDeleteSongTransaction = () => {
@@ -308,7 +308,7 @@ class App extends React.Component {
             currentList: prevState.currentList,
             listKeyPairMarkedForDeletion : keyPair,
             sessionData: prevState.sessionData,
-            selectedSongIdx: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex
         }), () => {
             // PROMPT THE USER
             this.showDeleteListModal();
