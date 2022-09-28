@@ -36,12 +36,14 @@ class App extends React.Component {
         // GET THE SESSION DATA FROM OUR DATA MANAGER
         let loadedSessionData = this.db.queryGetSessionData();
 
+        // need to add a state variable for the current title of the song...
         // SETUP THE INITIAL STATE
         this.state = {
             listKeyPairMarkedForDeletion : null,
             currentList : null,
             sessionData : loadedSessionData,
-            selectedIndex: -1
+            selectedIndex: -1,
+            songTitle: null
         }
     }
     sortKeyNamePairsByName = (keyNamePairs) => {
@@ -386,7 +388,7 @@ class App extends React.Component {
                     currentList={this.state.currentList} />
                 <DeleteListModal
                     listKeyPair={this.state.listKeyPairMarkedForDeletion}
-                    hideDeleteListModalCallback={this.hideDeleteSongModal}
+                    hideDeleteListModalCallback={this.hideDeleteListModal}
                     deleteListCallback={this.deleteMarkedList}
                 />
                 <DeleteSongModal
