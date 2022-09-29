@@ -9,6 +9,8 @@ import jsTPS from './common/jsTPS.js';
 import MoveSong_Transaction from './transactions/MoveSong_Transaction.js';
 // import AddSong_Transaction from './transactions/AddSong_Transaction';
 import DeleteSong_Transaction from './transactions/DeleteSong_Transaction.js';
+import EditSong_Transaction from './transactions/EditSong_Transaction';
+import EditSongModal from './components/EditSongModal';
 
 // THESE REACT COMPONENTS ARE MODALS
 import DeleteListModal from './components/DeleteListModal.js';
@@ -325,7 +327,47 @@ class App extends React.Component {
           sessionData: prevState.sessionData,
           selectedIndex: index,
         }));
-      };
+    }
+
+    editSong = (songIndex, editedSong) => {
+        let list = this.state.currentList;
+        let song = list.songs[songIndex];
+
+        if (editedSong.title !== ""){
+            song.title = editedSong.title;
+        }
+
+        if (editedSong.artist !== ""){
+            song.artist = editedSong.artist;
+        }
+
+        if (editedSong.youtubeId !== ""){
+            song.youtubeId = editedSong.youtubeId;
+        }
+
+        this.setStateWithUpdatedList(list);
+    }
+
+    
+    
+    addEditSongTransaction = (title, artist, youtubeId) => {
+        let originalSongTemp = this.state.currentList.songs[this.state.selectedIndex];
+        let originalSong = {
+            title: originalSongTemp.title,
+            artist: originalSongTemp.artist,
+            youtubeId: originalSongTemp.youtubeId
+        }
+        
+        let newSong = {
+            title: title, 
+            artist: artist, 
+            youTubeId: youtubeId
+        }
+
+        let transaction = new EditSong_Transaction(this, this.state.selectedIndex, originalSong, newSong);
+        this.tps.addTransaction(transaction);
+        this.hideEditSongModal();
+    }
 
     // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
     // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
@@ -347,6 +389,16 @@ class App extends React.Component {
     hideDeleteSongModal() {
         let modal = document.getElementById("delete-song-modal");
         modal.classList.remove('is-visible');
+      }
+
+    showEditSongModal() {
+        let editModal = document.getElementById('edit-song-modal');
+        editModal.classList.add('is-visible');
+      }
+
+    hideEditSongModal() {
+        let editModal = document.getElementById('edit-song-modal');
+        editModal.classList.remove('is-visible');
       }
       
     render() {
@@ -382,6 +434,7 @@ class App extends React.Component {
                     currentList={this.state.currentList}
                     moveSongCallback={this.addMoveSongTransaction} 
                     //added
+                    editSongCallback={this.showEditSongModal}
                     deleteSongCallback={this.showDeleteSongModal} 
                     selectSongCallback={this.selectSong}/>
                 <Statusbar 
@@ -391,6 +444,10 @@ class App extends React.Component {
                     hideDeleteListModalCallback={this.hideDeleteListModal}
                     deleteListCallback={this.deleteMarkedList}
                 />
+                <EditSongModal
+                    hideEditSongModalCallback={this.hideEditSongModal}
+                    editSongCallback={this.addEditSongTransaction}
+                 />
                 <DeleteSongModal
                     hideDeleteSongModalCallback={this.hideDeleteSongModal}
                     deleteSongCallback={this.addDeleteSongTransaction}
