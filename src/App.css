@@ -243,6 +243,12 @@ input {
   font-size: 48pt;
 }
 
+.modal-text-label {
+  display: grid;
+  font-size: 2.5rem;
+  padding-right: 10%;
+}
+
 span {
   font-weight: bold;
   font-style: italic;
