@@ -329,20 +329,20 @@ class App extends React.Component {
         }));
     }
 
-    editSong = (songIndex, editedSong) => {
+    editSong = (songIndex, newSong) => {
         let list = this.state.currentList;
-        let song = list.songs[songIndex];
+        let currentSong = list.songs[songIndex];
 
-        if (editedSong.title !== ""){
-            song.title = editedSong.title;
+        if (newSong.title !== ""){
+            currentSong.title = newSong.title;
         }
 
-        if (editedSong.artist !== ""){
-            song.artist = editedSong.artist;
+        if (newSong.artist !== ""){
+            currentSong.artist = newSong.artist;
         }
 
-        if (editedSong.youtubeId !== ""){
-            song.youtubeId = editedSong.youtubeId;
+        if (newSong.youTubeId !== ""){
+            currentSong.youTubeId = newSong.youTubeId;
         }
 
         this.setStateWithUpdatedList(list);
@@ -350,21 +350,24 @@ class App extends React.Component {
 
     
     
-    addEditSongTransaction = (title, artist, youtubeId) => {
-        let originalSongTemp = this.state.currentList.songs[this.state.selectedIndex];
+    addEditSongTransaction = (title, artist, youTubeId) => {
+        let currentSong = this.state.currentList.songs[this.state.selectedIndex];
+        
         let originalSong = {
-            title: originalSongTemp.title,
-            artist: originalSongTemp.artist,
-            youtubeId: originalSongTemp.youtubeId
+            title: currentSong.title,
+            artist: currentSong.artist,
+            youTubeId: currentSong.youTubeId
         }
         
-        let newSong = {
-            title: title, 
-            artist: artist, 
-            youTubeId: youtubeId
-        }
+        // let newSong = {
+        //     title: title, 
+        //     artist: artist, 
+        //     youTubeId: youTubeId
+        // };
 
-        let transaction = new EditSong_Transaction(this, this.state.selectedIndex, originalSong, newSong);
+        let editedSong = { title: title, artist: artist, youTubeId: youTubeId };
+
+        let transaction = new EditSong_Transaction(this, this.state.selectedIndex, originalSong, editedSong);
         this.tps.addTransaction(transaction);
         this.hideEditSongModal();
     }

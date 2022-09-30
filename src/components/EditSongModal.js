@@ -50,7 +50,7 @@ export default class EditSongModal extends Component {
                   type='text'
                   id='edit-song-title-textfield'
                   //class='modal-form'
-                  defaultValue={this.state.title}
+                  //defaultValue={this.state.title}
                   placeholder="song's title"
                   onChange={this.setTitle}
                 />
@@ -61,18 +61,18 @@ export default class EditSongModal extends Component {
                   type='text'
                   id='edit-song-artist-textfield'
                   //class='modal-form'
-                  defaultValue={this.state.artist}
+                  //defaultValue={this.state.artist}
                   placeholder="song's artist"
                   onChange={this.setArtist}
                 />
               </div>
               <div class='edit-song-modal-row'>
-                <span class='modal-text-label'>YouTubeId:</span>
+                <span class='modal-text-label'>YouTube Id:</span>
                 <input
                   type='text'
                   id='edit-song-youTubeId-textfield'
                   //class='modal-form'
-                  defaultValue={this.state.youTubeId}
+                  //defaultValue={this.state.youTubeId}
                   placeholder="song's Youtube ID"
                   onChange={this.setYouTubeId}
                 />

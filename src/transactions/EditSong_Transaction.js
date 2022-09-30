@@ -7,12 +7,12 @@ import jsTPS_Transaction from '../common/jsTPS.js';
  * @author Srineeth Jayanthi
  */
 export default class EditSong_Transaction extends jsTPS_Transaction {
-  constructor(app, songIndex, orginalSong, editedSong) {
+  constructor(app, songIndex, originalSong, editedSong) {
     super();
     // inside
     this.app = app;
     this.songIndex = songIndex;
-    this.orginalSong = orginalSong;
+    this.original = originalSong;
     this.editedSong = editedSong;
   }
 
@@ -21,6 +21,6 @@ export default class EditSong_Transaction extends jsTPS_Transaction {
   }
 
   undoTransaction() {
-    this.app.editSong(this.songIndex, this.originalSong);
+    this.app.editSong(this.songIndex, this.original);
   }
 }
