@@ -191,6 +191,7 @@ class App extends React.Component {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
             this.tps.clearAllTransactions();
+            this.forceUpdate();
         });
     }
     // THIS FUNCTION BEGINS THE PROCESS OF CLOSING THE CURRENT LIST
@@ -204,6 +205,7 @@ class App extends React.Component {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
             this.tps.clearAllTransactions();
+            this.forceUpdate();
         });
     }
     setStateWithUpdatedList(list) {
@@ -420,7 +422,7 @@ class App extends React.Component {
     }
     
     componentWillUnmount() {
-        document.addEventListener('keydown', this.handleUndoRedo);
+        document.removeEventListener('keydown', this.handleUndoRedo);
     }
       
     render() {
@@ -428,11 +430,16 @@ class App extends React.Component {
         let canUndo = this.tps.hasTransactionToUndo();
         let canRedo = this.tps.hasTransactionToRedo();
         let canClose = this.state.currentList !== null;
+        let canCreateNewList = this.state.currentList === null;
         return (
             <React.Fragment id='root'>
                 <Banner />
+                {/* <SidebarHeading
+                    createNewListCallback={this.createNewList}
+                /> */}
                 <SidebarHeading
                     createNewListCallback={this.createNewList}
+                    canCreateNewList={canCreateNewList}
                 />
                 <SidebarList
                     currentList={this.state.currentList}
