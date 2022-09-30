@@ -206,6 +206,7 @@ class App extends React.Component {
             this.tps.clearAllTransactions();
         });
     }
+    
     setStateWithUpdatedList(list) {
         this.setState(prevState => ({
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
@@ -218,6 +219,7 @@ class App extends React.Component {
             this.db.mutationUpdateList(this.state.currentList);
         });
     }
+
     getPlaylistSize = () => {
         return this.state.currentList.songs.length;
     }
@@ -391,9 +393,24 @@ class App extends React.Component {
         modal.classList.remove('is-visible');
       }
 
-    showEditSongModal() {
+    showEditSongModal = () => {
+         // populate modal        
         let editModal = document.getElementById('edit-song-modal');
         editModal.classList.add('is-visible');
+
+        // let song = this.state.currentList.songs[this.state.selectedIndex];
+        
+        // if (song != null){
+        // try{
+        //     console.log("ur a flop");
+        //     document.getElementById("edit-song-title-textfield").value = song.title;
+        //     document.getElementById("edit-song-artist-textfield").value = song.artist;
+        //     document.getElementById("edit-song-youTubeId-textfield").value = song.youTubeId;
+        // } catch(e){
+
+        // }
+           
+        // }
       }
 
     hideEditSongModal() {
