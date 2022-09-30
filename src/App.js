@@ -350,6 +350,7 @@ class App extends React.Component {
         let modal = document.getElementById("delete-song-modal");
         modal.classList.remove('is-visible');
       }
+<<<<<<< HEAD
 
     showEditSongModal = () => {
          // populate modal        
@@ -375,6 +376,8 @@ class App extends React.Component {
         let editModal = document.getElementById('edit-song-modal');
         editModal.classList.remove('is-visible');
       }
+=======
+>>>>>>> parent of 831d0a7 (Editing song lowkey working)
       
     render() {
         let canAddSong = this.state.currentList !== null;
