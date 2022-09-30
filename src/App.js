@@ -431,6 +431,7 @@ class App extends React.Component {
         let canRedo = this.tps.hasTransactionToRedo();
         let canClose = this.state.currentList !== null;
         let canCreateNewList = this.state.currentList === null;
+        
         return (
             <React.Fragment id='root'>
                 <Banner />
