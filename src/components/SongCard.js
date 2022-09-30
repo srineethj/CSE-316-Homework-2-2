@@ -37,11 +37,6 @@ export default class SongCard extends React.Component {
             draggedTo: false
         }));
     }
-    handleDoubleClick = (event) => {
-        event.preventDefault();
-        this.props.selectSongCallback(parseInt(this.props.id.split('playlist-song-').pop()) - 1);
-        this.props.editSongCallback();
-    }
     handleDrop = (event) => {
         event.preventDefault();
         let target = event.target;
@@ -87,7 +82,6 @@ export default class SongCard extends React.Component {
                 onDragOver={this.handleDragOver}
                 onDragEnter={this.handleDragEnter}
                 onDragLeave={this.handleDragLeave}
-                onDoubleClick={this.handleDoubleClick}
                 onDrop={this.handleDrop}
                 draggable="true"
             >
