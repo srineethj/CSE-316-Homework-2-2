@@ -36,6 +36,11 @@ Importing the fonts Tangerine, as requested
   grid-template-rows: 10% 10% 70% 10%;
 }
 
+.disabled {
+  background-color: lightgray;
+  cursor: auto;
+}
+
 /* 
   THE ROOT IS DIVIDED INTO 6 BROAD REGIONS:
   -banner

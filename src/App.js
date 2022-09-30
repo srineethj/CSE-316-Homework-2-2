@@ -403,6 +403,25 @@ class App extends React.Component {
         let editModal = document.getElementById('edit-song-modal');
         editModal.classList.remove('is-visible');
       }
+
+    handleUndoRedo = (event) => {
+        event.preventDefault();
+        let canUndo = this.tps.hasTransactionToUndo();
+        let canRedo = this.tps.hasTransactionToRedo();
+        if (event.ctrlKey) {
+          if (event.keyCode === 90) {
+            if (canUndo) this.undo();
+          } else if (event.keyCode === 89) if (canRedo) this.redo();
+        }
+    };
+    
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleUndoRedo);
+    }
+    
+    componentWillUnmount() {
+        document.addEventListener('keydown', this.handleUndoRedo);
+    }
       
     render() {
         let canAddSong = this.state.currentList !== null;
