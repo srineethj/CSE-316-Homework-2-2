@@ -87,7 +87,8 @@ class App extends React.Component {
                 counter: prevState.sessionData.counter + 1,
                 keyNamePairs: updatedPairs,
             },
-            selectedIndex: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex,
+            selectedSongTitle: prevState.selectedSongTitle
         }), () => {
             // PUTTING THIS NEW LIST IN PERMANENT STORAGE
             // IS AN AFTER EFFECT
@@ -125,7 +126,8 @@ class App extends React.Component {
                 counter: prevState.sessionData.counter - 1,
                 keyNamePairs: newKeyNamePairs
             },
-            selectedIndex: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex,
+            selectedSongTitle: prevState.selectedSongTitle
         }), () => {
             // DELETING THE LIST FROM PERMANENT STORAGE
             // IS AN AFTER EFFECT
@@ -169,7 +171,8 @@ class App extends React.Component {
                 counter: prevState.sessionData.counter,
                 keyNamePairs: newKeyNamePairs
             },
-            selectedIndex: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex,
+            selectedSongTitle: prevState.selectedSongTitle
         }), () => {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
@@ -186,7 +189,8 @@ class App extends React.Component {
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             currentList: newCurrentList,
             sessionData: this.state.sessionData,
-            selectedIndex: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex,
+            selectedSongTitle: prevState.selectedSongTitle
         }), () => {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
@@ -200,7 +204,8 @@ class App extends React.Component {
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             currentList: null,
             sessionData: this.state.sessionData,
-            selectedIndex: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex,
+            selectedSongTitle: prevState.selectedSongTitle
         }), () => {
             // AN AFTER EFFECT IS THAT WE NEED TO MAKE SURE
             // THE TRANSACTION STACK IS CLEARED
@@ -213,7 +218,8 @@ class App extends React.Component {
             listKeyPairMarkedForDeletion : prevState.listKeyPairMarkedForDeletion,
             currentList : list,
             sessionData : this.state.sessionData,
-            selectedIndex: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex,
+            selectedSongTitle: prevState.selectedSongTitle
         }), () => {
             // UPDATING THE LIST IN PERMANENT STORAGE
             // IS AN AFTER EFFECT
@@ -314,7 +320,8 @@ class App extends React.Component {
             currentList: prevState.currentList,
             listKeyPairMarkedForDeletion : keyPair,
             sessionData: prevState.sessionData,
-            selectedIndex: prevState.selectedIndex
+            selectedIndex: prevState.selectedIndex,
+            selectedSongTitle: prevState.selectedSongTitle
         }), () => {
             // PROMPT THE USER
             this.showDeleteListModal();
@@ -322,12 +329,13 @@ class App extends React.Component {
     }
 
     selectSong = (index) => {
-        //let list = this.state.currentList;
+        let list = this.state.currentList;
         this.setState((prevState) => ({
           currentList: this.state.currentList,
           listKeyPairMarkedForDeletion: this.state.sessionData,
           sessionData: prevState.sessionData,
           selectedIndex: index,
+          selectedSongTitle: list.songs[index].title
         }));
     }
 
@@ -431,7 +439,7 @@ class App extends React.Component {
         let canRedo = this.tps.hasTransactionToRedo();
         let canClose = this.state.currentList !== null;
         let canCreateNewList = this.state.currentList === null;
-        
+
         return (
             <React.Fragment id='root'>
                 <Banner />
@@ -481,6 +489,7 @@ class App extends React.Component {
                 <DeleteSongModal
                     hideDeleteSongModalCallback={this.hideDeleteSongModal}
                     deleteSongCallback={this.addDeleteSongTransaction}
+                    selectedSongTitle={this.state.selectedSongTitle}
                 />
             </React.Fragment>
         );
