@@ -404,7 +404,7 @@ class App extends React.Component {
         modal.classList.remove('is-visible');
       }
 
-    showEditSongModal() {
+    showEditSongModal(){
         let editModal = document.getElementById('edit-song-modal');
         editModal.classList.add('is-visible');
       }

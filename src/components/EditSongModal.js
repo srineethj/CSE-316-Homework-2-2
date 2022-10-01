@@ -37,7 +37,6 @@ export default class EditSongModal extends Component {
 
   render() {
     const { hideEditSongModalCallback, editSongCallback } = this.props;
-
     return (
       <div class='modal' id='edit-song-modal' data-animation='slideInOutLeft'>
         <div class='modal-root' id='verify-edit-song-root'>
@@ -50,7 +49,7 @@ export default class EditSongModal extends Component {
                   type='text'
                   id='edit-song-title-textfield'
                   //class='modal-form'
-                  //defaultValue={this.state.title}
+                  value={this.state.title}
                   placeholder="song's title"
                   onChange={this.setTitle}
                 />
@@ -61,7 +60,7 @@ export default class EditSongModal extends Component {
                   type='text'
                   id='edit-song-artist-textfield'
                   //class='modal-form'
-                  //defaultValue={this.state.artist}
+                  value={this.state.artist}
                   placeholder="song's artist"
                   onChange={this.setArtist}
                 />
@@ -72,7 +71,7 @@ export default class EditSongModal extends Component {
                   type='text'
                   id='edit-song-youTubeId-textfield'
                   //class='modal-form'
-                  //defaultValue={this.state.youTubeId}
+                  value={this.state.youTubeId}
                   placeholder="song's Youtube ID"
                   onChange={this.setYouTubeId}
                 />
